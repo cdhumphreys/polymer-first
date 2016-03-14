@@ -1,8 +1,4 @@
-/*google-chart {
-	width: 500px;
-	height: 500px
-}*/
-#resizing_chart {
-	width: 500px;
-	height: 500px;
+#my_chart {
+	width: 1000px;
+	height:1000px;
 }

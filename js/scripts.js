@@ -1,63 +1,93 @@
  (function(document){
 	'use strict';
 
-	// var chart = document.getElementById('my_chart');
+	var chart = document.getElementById('my_chart');
 
-	// chart.type='column';
-	// chart.options = {
-	// 		title:'Best Chart Ever',
-	// 		vAxis: {minValue: 0, maxValue: 30},
-	// 		legend: {position: 'right'}
+	chart.type='column';
+	chart.options = {
+			title:'World Populations',
+			legend: {position: 'right'},
+			tooltip: {isHtml: true}
 
-	// };
-	// chart.rows = [ ["Bagels", 12, 8], ["Donuts", 5, 1], ["Croissants", 20, 25] ];
-
-
-
-	var changingChart = document.getElementById('mutating_chart');
-
-	var randomNum = function(min, max) {
-		return (Math.random() * (max - min)) + min;
 	};
+	chart.rows = [];
 
-	// setInterval(function(){
-	// 	changingChart.rows = [ 
-	// 		["Col1", randomNum(0, 10)], 
-	// 		["Col2", randomNum(0, 20)],
-	// 		["Col3", randomNum(0, 10)] 
-	// 	]
-	// }, 2000);
+	var chartData = [];
+
+
 
   var sheet = document.querySelector('google-sheets');
   var fetched = false;
   sheet.addEventListener('google-sheet-data', function(e) {
-   // this.spreadsheets - list of the user's spreadsheets
-   // this.tab - information on the tab that was fetched
-   // this.rows - cell row information for the tab that was fetched
-   var columnNames = [];
+	   // this.spreadsheets - list of the user's spreadsheets
+	   // this.tab - information on the tab that was fetched
+	   // this.rows - cell row information for the tab that was fetched
+	   var columnNames = [];
+	   
 
-   if(!fetched) {
-   	fetched = true;
-	   for (var key in this.rows[0]) {
+	   if(!fetched) {
+	   	fetched = true;
 
-			if (key.includes("gsx")) {
-				columnNames.push([key.substr(key.indexOf('$')+1), key]);
-				// console.log(key.substr(key.indexOf('$')+1));
-			}
-	   }
-	   // console.log(columnNames);
-	   (this.rows).forEach( function(element, index) {
-	   	console.log(element['gsx$country']['$t']);
-	   	console.log(element['gsx$population']['$t']);
-	   	console.log(element['gsx$dateupdated']['$t']);
-	   	console.log(element['gsx$ofworldpopulation']['$t']);
-
-	   });
-	}
+		   for (var key in this.rows[0]) {
+				if (key.includes("gsx")) {
+					columnNames.push([key.substr(key.indexOf('$')+1), key]);
+					
+				}
+		   }
+		   
+		   (this.rows).forEach( function(element, index) {
+		   	var country = element['gsx$country']['$t'];
+		   	var population = parseInt(element['gsx$population']['$t'].replace(/,/g,''));
+		   	var percentOfWorld = element['gsx$ofworldpopulation']['$t'];
+		   	var dateUpdated = element['gsx$dateupdated']['$t']    
+			   	chartData.push([
+			   		country, 
+			   		population,
+			   		returnHTMLToolTip(country, population, percentOfWorld, dateUpdated) 
+			   		]);	   	
+			   
+		   });
+		   chart.rows = chartData;
+		}
    
   });
 
   sheet.addEventListener('error', function(e) {
    // e.detail.response
   });
+
+  function returnHTMLToolTip(country, population, percentage, updated) {
+//   	var tooltip = '<div>' + '<table>' +
+// 	'<tr>' +
+// 		'<td>'+country+'</td>' +
+// 	'</tr>' +
+// 	'<tr>' +
+// 		'<td>'+population+'</td>' +
+// 	'</tr>' +
+// 	'<tr>' +
+// 		'<td>'+percentage+'</td>' +
+// 	'</tr>' +
+// 	'<tr>' +
+// 		'<td>'+updated+'</td>' +
+// 	'</tr>' +
+// '</table>' +
+//   	'</div>';
+	var tooltip = '<div style="border:1px solid black">';
+	tooltip += 'Country:' + '<b>'+country+'</b>' + '<br>' +
+					'Population: ' + '<b>'+population+'</b>' + '<br>' +
+					'Percentage of World: ' + '<b>'+percentage+'</b>' + '<br>' +
+					'Last Updated: ' + '<b>'+updated+'</b>';
+	tooltip += '</div>';
+
+  	return tooltip;
+  }
 })(document);
+
+
+
+
+
+
+
+
+
