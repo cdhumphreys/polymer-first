@@ -2,7 +2,8 @@
 	'use strict';
 
 	var chart = document.getElementById('my_chart');
-
+	var countriesList = document.getElementById('countriesList');
+	
 	chart.type='column';
 	chart.options = {
 			title:'World Populations',
@@ -57,21 +58,7 @@
   });
 
   function returnHTMLToolTip(country, population, percentage, updated) {
-//   	var tooltip = '<div>' + '<table>' +
-// 	'<tr>' +
-// 		'<td>'+country+'</td>' +
-// 	'</tr>' +
-// 	'<tr>' +
-// 		'<td>'+population+'</td>' +
-// 	'</tr>' +
-// 	'<tr>' +
-// 		'<td>'+percentage+'</td>' +
-// 	'</tr>' +
-// 	'<tr>' +
-// 		'<td>'+updated+'</td>' +
-// 	'</tr>' +
-// '</table>' +
-//   	'</div>';
+
 	var tooltip = '<div style="border:1px solid black">';
 	tooltip += 'Country:' + '<b>'+country+'</b>' + '<br>' +
 					'Population: ' + '<b>'+population+'</b>' + '<br>' +

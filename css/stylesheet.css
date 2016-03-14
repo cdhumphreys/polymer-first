@@ -1,4 +1,35 @@
 #my_chart {
+	position: absolute;
 	width: 1000px;
 	height:1000px;
+
+	top: 50%;
+	left:50%;
+	-webkit-transform: translate(-50%,-50%);
+	   -moz-transform: translate(-50%,-50%);
+	    -ms-transform: translate(-50%,-50%);
+	     -o-transform: translate(-50%,-50%);
+	        transform: translate(-50%,-50%);
+}
+
+#selectionBox {
+	width: 200px;
+	height: 300px;
+	border: 1px black solid;
+	margin: 10px;
+}
+
+paper-checkbox {
+	width: 100%;
+	margin: 5px;
+}
+
+paper-dialog-scrollable {
+	/*border: 1px blue dashed;*/
+	height: 200px;
+	margin: 0;
+}
+
+h4 {
+	margin: 10px auto;
 }

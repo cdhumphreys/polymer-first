@@ -9,6 +9,16 @@
 	<link rel="import" href="bower_components/google-chart/google-chart.html">
 	<link rel="import" href="bower_components/google-sheets/google-sheets.html">
 
+	 <link rel="import" href="bower_components/paper-item/paper-item.html">
+	 <link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+	 <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+	 <link rel="import" href="bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+	 <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+
+  <link rel="import" href="bower_components/iron-collapse/iron-collapse.html">
+	
+
+
 
 	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
 </head>
@@ -27,7 +37,30 @@
   scopes="https://spreadsheets.google.com/feeds">
 </google-signin> -->
     <google-sheets id="mySheet" key="1n8NtLEQH0uoisHSDbOxnUz9x4c0fh8IQcnqnLD2w-Bk" tab-id ="1" published></google-sheets>
-
+    
+    <div id="selectionBox">
+	    <h4>Choose Countries To Display:</h4>
+	    <hr>
+	    <paper-dialog-scrollable>    	
+		    <paper-listbox class="dropdown-content" id="countriesList" multi>	   
+		    	<paper-checkbox>Item1</paper-checkbox>
+		    	<paper-checkbox>Item2</paper-checkbox>
+		    	<paper-checkbox>Item3</paper-checkbox>
+		    	<paper-checkbox>Item4</paper-checkbox>
+		    	<paper-checkbox>Item5</paper-checkbox>
+		    	<paper-checkbox>Item6</paper-checkbox>
+		    	<paper-checkbox>Item7</paper-checkbox>
+		    	<paper-checkbox>Item1</paper-checkbox>
+		    	<paper-checkbox>Item2</paper-checkbox>
+		    	<paper-checkbox>Item3</paper-checkbox>
+		    	<paper-checkbox>Item4</paper-checkbox>
+		    	<paper-checkbox>Item5</paper-checkbox>
+		    	<paper-checkbox>Item6</paper-checkbox>
+		    	<paper-checkbox>Item7</paper-checkbox>
+			</paper-listbox>
+		</paper-dialog-scrollable>
+		<hr>
+	</div>
 
 
 <script src="js/scripts.js" type="text/javascript"></script>
