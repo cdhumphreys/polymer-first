@@ -1,0 +1,38 @@
+<dom-module id="selection-box">
+  <template>
+  <div id="selectionBox">
+    <h4>Choose Countries To Display:</h4>
+    <hr>
+    <paper-dialog-scrollable>     
+      <paper-listbox class="dropdown-content"  multi> 
+      <template is="dom-repeat" items="{{countries}}">
+        <paper-checkbox>{{item.name}}</paper-checkbox>
+      </template> 
+      </paper-listbox>
+    </paper-dialog-scrollable>
+    <hr>
+  </div>
+  </template>
+
+  <script>
+    (function() {
+      Polymer({
+        is: 'selection-box',
+        ready: function() {
+          this.countries = [
+            {
+              name: "UK"
+            },
+            {
+              name: "China"
+            },
+            {
+              name: "France"
+            }
+          ]
+        }
+
+      });
+    })();
+  </script>
+</dom-module>
