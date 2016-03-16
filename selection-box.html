@@ -1,17 +1,32 @@
+  <link rel="import" href="bower_components/paper-item/paper-item.html">
+   <link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+   <link rel="import" href="bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+   <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+
 <dom-module id="selection-box">
   <template>
-  <div id="selectionBox">
-    <h4>Choose Countries To Display:</h4>
-    <hr>
-    <paper-dialog-scrollable>     
-      <paper-listbox class="dropdown-content"  multi> 
-      <template is="dom-repeat" items="{{countries}}">
-        <paper-checkbox>{{item.name}}</paper-checkbox>
-      </template> 
-      </paper-listbox>
-    </paper-dialog-scrollable>
-    <hr>
-  </div>
+  <style>
+    div {
+      width: 200px;
+      height: 300px;
+    }
+    paper-checkbox {
+      --paper-checkbox-unchecked-background-color: rgba(0,0,0,0.2);
+    }
+  
+  </style>
+    <div>
+      <h4>Choose Countries To Display:</h4>
+      <hr>
+      <paper-dialog-scrollable>     
+        <paper-listbox class="dropdown-content"  multi> 
+        <template is="dom-repeat" items="{{countries}}">
+          <paper-checkbox checked noink index=[[item.index]] value=[[item.name]]>[[item.name]]</paper-checkbox>
+        </template> 
+        </paper-listbox>
+      </paper-dialog-scrollable>
+      <hr>
+    </div>
   </template>
 
   <script>
@@ -19,19 +34,8 @@
       Polymer({
         is: 'selection-box',
         ready: function() {
-          this.countries = [
-            {
-              name: "UK"
-            },
-            {
-              name: "China"
-            },
-            {
-              name: "France"
-            }
-          ]
+          this.countries = [];
         }
-
       });
     })();
   </script>

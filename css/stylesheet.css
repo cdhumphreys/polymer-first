@@ -1,4 +1,7 @@
-#my_chart {
+body, html {
+	font-family: 'Roboto', sans-serif;
+}
+#myChart {
 	position: absolute;
 	width: 1000px;
 	height:1000px;

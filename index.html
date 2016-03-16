@@ -4,67 +4,57 @@
 <head>
 	<title>Polymer Experiment</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-	<script src="bower_components/polymer/polymer.html"></script>
 
+	<!-- Polymer polyfills -->
+	<script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+
+	<!-- Chart & Sheets -->
 	<link rel="import" href="bower_components/google-chart/google-chart.html">
 	<link rel="import" href="bower_components/google-sheets/google-sheets.html">
 
-	 <link rel="import" href="bower_components/paper-item/paper-item.html">
-	 <link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
-	 <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
-	 <link rel="import" href="bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
-	 <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+	<!-- Paper Elements -->
+	<!-- <link rel="import" href="bower_components/paper-item/paper-item.html">
+	<link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+	<link rel="import" href="bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+	<link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html"> -->
 
-	 <link rel="import" href="selection-box.html">
+	<!-- Iron Elements -->
+	<link rel="import" href="bower_components/iron-collapse/iron-collapse.html">
 
-  <link rel="import" href="bower_components/iron-collapse/iron-collapse.html">
+	<!-- My custom elements -->
+	<link rel="import" href="selection-box.html">
+	<link rel="import" href="sort-box.html">
+
+
+
 	
 
-
-
+	<!-- CSS -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
 </head>
 <body>	
+
+ 	<google-sheets 
+	 	id="mySheet" 
+	 	key="1n8NtLEQH0uoisHSDbOxnUz9x4c0fh8IQcnqnLD2w-Bk" 
+	 	tab-id ="1" 
+ 	published>
+ 	</google-sheets>
 	<google-chart
-	    id= 'my_chart'
-	    type= 'column'
-	    cols='[{"label": "Country", "type": "string"},{"label": "Population", "type": "number"}, {"type":"string", "role":"tooltip", "p":{"html":true} }]'
+	    id= 'myChart'
+	    cols='[
+		    {"label": "Country", "type": "string"},
+		    {"label": "Population", "type": "number"}, 
+		    {"type":"string", "role":"tooltip", "p":{"html":true}}
+	    ]'
 	>
 	</google-chart>
-	<!-- <google-chart id="mutating_chart" type="column" options='{"title": "Random data",
-              "vAxis": {"minValue" : 0, "maxValue": 10},
-              "animation": {"duration": "1000"}}' cols='[{"label": "Data", "type": "string"},{"label": "Value", "type": "number"}]' rows='[["Col1", 50.0],["Col2", 5.0],["Col3", 5.0]]'></google-chart> -->
-<!--   <google-signin
-  client-id= "624645729040-ikijsdk37qalanb5bc61f17pp3llclal.apps.googleusercontent.com"
-  scopes="https://spreadsheets.google.com/feeds">
-</google-signin> -->
-    <google-sheets id="mySheet" key="1n8NtLEQH0uoisHSDbOxnUz9x4c0fh8IQcnqnLD2w-Bk" tab-id ="1" published></google-sheets>
-    
-  <!--   <div id="selectionBox">
-	    <h4>Choose Countries To Display:</h4>
-	    <hr>
-	    <paper-dialog-scrollable>    	
-		    <paper-listbox class="dropdown-content" id="countriesList" multi>	   
-		    	<paper-checkbox>Item1</paper-checkbox>
-		    	<paper-checkbox>Item2</paper-checkbox>
-		    	<paper-checkbox>Item3</paper-checkbox>
-		    	<paper-checkbox>Item4</paper-checkbox>
-		    	<paper-checkbox>Item5</paper-checkbox>
-		    	<paper-checkbox>Item6</paper-checkbox>
-		    	<paper-checkbox>Item7</paper-checkbox>
-		    	<paper-checkbox>Item8</paper-checkbox>
-		    	<paper-checkbox>Item9</paper-checkbox>
-		    	<paper-checkbox>Item10</paper-checkbox>
-		    	<paper-checkbox>Item11</paper-checkbox>
-		    	<paper-checkbox>Item12</paper-checkbox>
-		    	<paper-checkbox>Item13</paper-checkbox>
-		    	<paper-checkbox>Item14</paper-checkbox>
-			</paper-listbox>
-		</paper-dialog-scrollable>
-		<hr>
-	</div> -->
 
+   
+    
+	<selection-box id="countrySelect"></selection-box>
+	<sort-box id="sortBox"></sort-box>
 
 
 
