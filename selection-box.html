@@ -34,7 +34,10 @@
       Polymer({
         is: 'selection-box',
         ready: function() {
-          this.countries = [];
+          this.countries = [];          
+        },
+        attached: function() {
+          this.fire('populated');
         }
       });
     })();
