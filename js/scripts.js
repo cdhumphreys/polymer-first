@@ -3,8 +3,7 @@
 	var chart = document.getElementById('myChart');
 	var countrySelect = document.getElementById('countrySelect');
 	var sortBox = document.getElementById('sortBox');
-
-	var checkPopulated = false;
+	var activeCheckboxes = [];
 
 	chart.type='column';
 	chart.options = {
@@ -48,6 +47,7 @@
 	   		   		name: element['gsx$country']['$t'],
 	   		   		index: index
 	   		   	});
+	   		   	activeCheckboxes.push(1);
 		    });
 		   chart.rows = chartData;
 
@@ -97,7 +97,7 @@
   };
 
   function toggleCountry(country) {
-  	// console.log('toggling country');
+
   	var index = country.index;
   	var name = country.value;
   	var nowChecked = country.checked;
@@ -115,39 +115,35 @@
 		chart.rows=[];
 		chart.rows = newChartData;		
 	}
-	sortData(selectedCategory);
-	chart.drawChart();
+	activeCheckboxes[index] = 1 - activeCheckboxes[index];
+	
   
 
-  };
-
-  function getActiveDataIndices() {
-  	var activeIndices = [];
-  	var checkboxes = document.querySelectorAll('paper-checkbox');
-  	for (var i = 0; i < checkboxes.length; i++) {
-  		if (checkboxes[i].checked) {
-  			activeIndices.push(checkboxes[i].index);
-  		}
-  	}
-  	return activeIndices;
   };
 
   function sortData(category) {
   
   	var currentData = [];
-  	var indices = [];
-  	indices = getActiveDataIndices();
-  	for (var i = 0; i < indices.length; i++) {
-  		currentData.push(sheet.rows[i]);
+
+  	for (var i = 0; i < activeCheckboxes.length; i++) {
+  		if (activeCheckboxes[i] === 1) {
+  			currentData.push(sheet.rows[i]);
+  		}
+  		
   	}
  	
   	currentData.sort(function(a,b){
   		var firstItem = a['gsx$'+category]['$t'];
 		var secondItem = b['gsx$'+category]['$t'];
+		console.log(firstItem);
+		if(moment(firstItem, 'DD/MM/YYYY').format() !== 'Invalid date' && moment(secondItem, 'DD/MM/YYYY').format() !== 'Invalid date') {
+			console.log('we got dates bruv');
+		}
 
-  		if (!isNaN(parseInt(firstItem)) && !isNaN(parseInt(secondItem))) { 
+  		else if (!isNaN(parseInt(firstItem)) && !isNaN(parseInt(secondItem))) { 
   				var firstNum = parseInt(firstItem.replace(/,/g,''));
 				var secondNum = parseInt(secondItem.replace(/,/g,''));
+				return (secondNum - firstNum);
   			
   		}
   		else if (typeof firstItem === 'string' && typeof secondItem === 'string'){ 			
@@ -155,7 +151,6 @@
   		}  		
   	});
 
- 
 
   	var sortedChartData = [];
   	for (var j = 0; j < currentData.length; j++) {
@@ -165,16 +160,11 @@
 
   	chart.rows = [];
   	chart.rows = sortedChartData;
-  	chart.drawChart();
 
   	
   };
-// Might have to have an array with all of the possible countries with a variable to serve as active or not
-// update this every time there is a click on a country
-// search this when sorting as the checkbox state seems to be frozen on the search rather than updating 
-// -- this is probably why two way binding is super useful duh
   countrySelect.addEventListener('change', function(e) {  		
-  		toggleCountry(e.target);  		
+  		toggleCountry(e.target);
   		sortData(selectedCategory);
   			
   			
