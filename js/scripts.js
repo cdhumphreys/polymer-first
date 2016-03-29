@@ -179,10 +179,11 @@
   		}
   		else if (typeof firstItem === 'string' && typeof secondItem === 'string'){ 	
   			if (sortType === -1) {  				
-  				return firstItem.toLowerCase().localeCompare(secondItem.toLowerCase());
+  				return -1*(firstItem.toLowerCase().localeCompare(secondItem.toLowerCase()));
   			}
   			else if (sortType === 1) {
-  				return -1*(firstItem.toLowerCase().localeCompare(secondItem.toLowerCase()));
+  				return firstItem.toLowerCase().localeCompare(secondItem.toLowerCase());
+  				
   			}		
   			
   		}  		
